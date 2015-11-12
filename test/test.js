@@ -14,9 +14,8 @@ PalettoTestCase.prototype.testStory2 = function () {
 };
 
 PalettoTestCase.prototype.testStory3 = function () {
-    assertEquals(e.getPieces(), 35);
-    assertEquals(e.deletePieces(5,0), 1);
-    assertEquals(e.getPieces(), 35);
+    assertEquals(e.deletePieces(5,0), 35);
+    e.setPlayerPieces();
     assertEquals(e.getPlayerPieces(), 1);
-
+    assertEquals(e.addPiecesPlayer(1,"Yellow"), 1);
 };
