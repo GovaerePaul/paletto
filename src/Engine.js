@@ -93,5 +93,11 @@ var Engine = function () {
         }
     };
 
+    this.isInCorner = function (color) {
+        if(board[0][0] == color || board[0][5] == color || board[5][0] == color || board[5][5] == color){
+            return true;
+        }
 
+        return false;
+    };
 };

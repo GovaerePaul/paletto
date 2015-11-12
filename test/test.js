@@ -10,5 +10,5 @@ PalettoTestCase.prototype.testStory1 = function () {
 };
 
 PalettoTestCase.prototype.testStory2 = function () {
-    assertEquals(e.isInCorner(), true);
+    assertEquals(e.isInCorner("Yellow"), true);
 };
