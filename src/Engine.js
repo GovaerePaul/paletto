@@ -143,6 +143,20 @@ var Engine = function () {
         return currentPlayer[player][color];
     };
 
+    this.playerWin = function(){
+        var playerWin = this.getPiecesColor(1, "Black");
+
+        if(playerWin = 6){
+            return true;
+        }
+
+        return false;
+    };
+
+    this.getPiecesColor = function(player, color){
+        return currentPlayer[player][color];
+    };
+
     this.checkPossiblePieces = function (x,y) {
         var neighborNumber = 0;
  //       for (var i = 0; i < board.length; i++) {

@@ -174,5 +174,5 @@ PalettoTestCase.prototype.testStory6 = function () {
     assertEquals(d.getPlayer1Pieces(), 15);
     assertEquals(d.addPiecesPlayer(1,"Black"), 6);
 
-    assertEquals(e.playerWin(), true);
+    assertEquals(d.playerWin(), true);
 };
