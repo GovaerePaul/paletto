@@ -298,7 +298,7 @@ PalettoTestCase.prototype.testStory7 = function () {
     assertEquals(f.getPlayer2Pieces(), 11);
     assertEquals(f.addPiecesPlayer(2,"Black"), 2);
 
-    assertEquals(f.deletePieces(4,3), 12);
+    assertEquals(f.deletePieces(4,2), 12);
     f.setPlayer2Pieces();
     assertEquals(f.getPlayer2Pieces(), 12);
     assertEquals(f.addPiecesPlayer(2,"Black"), 3);
@@ -318,7 +318,7 @@ PalettoTestCase.prototype.testStory7 = function () {
     assertEquals(f.getPlayer1Pieces(), 14);
     assertEquals(f.addPiecesPlayer(1,"White"), 3);
 
-    assertEquals(f.deletePieces(1,4), 8);
+    assertEquals(f.deletePieces(3,2), 8);
     f.setPlayer1Pieces();
     assertEquals(f.getPlayer1Pieces(), 15);
     assertEquals(f.addPiecesPlayer(1,"White"), 4);
