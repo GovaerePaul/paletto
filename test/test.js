@@ -37,13 +37,15 @@ PalettoTestCase.prototype.testStory4 = function () {
 };
 
 PalettoTestCase.prototype.testStory5 = function () {
-    assertEquals(e.checkPossiblePieces(3,0), true);
-    assertEquals(e.checkPossiblePieces(5,0), true);
-    assertEquals(e.checkPossiblePieces(4,2), true);
-    assertEquals(e.checkPossiblePieces(0,3), true);
-    assertEquals(e.checkPossiblePieces(1,4), true);
-    assertEquals(e.checkPossiblePieces(2,5), true);
+    e.goToState();
 
-    assertEquals(e.checkPossiblePieces(2,2), true);
+    assertEquals(e.checkPossiblePieces(0,3), true);
+    assertEquals(e.checkPossiblePieces(0,5), true);
+    assertEquals(e.checkPossiblePieces(2,4), true);
+    assertEquals(e.checkPossiblePieces(3,0), true);
+    assertEquals(e.checkPossiblePieces(4,1), true);
+    assertEquals(e.checkPossiblePieces(5,2), true);
+
+    assertEquals(e.checkPossiblePieces(2,2), false);
 
 };
