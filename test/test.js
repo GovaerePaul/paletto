@@ -21,15 +21,21 @@ PalettoTestCase.prototype.testStory3 = function () {
 };
 
 PalettoTestCase.prototype.testStory4 = function () {
-    assertEquals(e.checkPossiblePieces(), true);
+    assertEquals(e.checkPossiblePieces(0,0), true);
 
     assertEquals(e.deletePieces(0,0), 34);
     e.setPlayer2Pieces();
     assertEquals(e.getPlayer2Pieces(), 1);
     assertEquals(e.addPiecesPlayer(1,"Black"), 1);
 
+    assertEquals(e.checkPossiblePieces(5,5), true);
+
     assertEquals(e.deletePieces(5,5), 33);
     e.setPlayer2Pieces();
     assertEquals(e.getPlayer2Pieces(), 2);
     assertEquals(e.addPiecesPlayer(1,"Black"), 2);
+};
+
+PalettoTestCase.prototype.testStory5 = function () {
+
 };
