@@ -8,6 +8,8 @@ var Engine = function () {
     var currentPlayer = new Array("1", "2");
     currentPlayer["1"] = new Array("Red", "Green", "Black", "White", "Yellow", "Blue");
     currentPlayer["2"] = new Array("Red", "Green", "Black", "White", "Yellow", "Blue");
+    var sameNeighborCount = 0;
+
     for (var i = 0; i < 6; i++) {
         board[i] = new Array(6);
     }
@@ -112,7 +114,11 @@ var Engine = function () {
     }
 
     this.deletePieces = function (x, y) {
-        board[x][y] == undefined;
+        if(board[x][y] == undefined){
+            console.log("WARNING : Marble already take by an other player!")
+        }
+
+        board[x][y] = undefined;
         piecesOnBoard--;
         return piecesOnBoard;
     };
@@ -143,8 +149,30 @@ var Engine = function () {
         return currentPlayer[player][color];
     };
 
-    this.playerWin = function(){
-        var playerWin = this.getPiecesColor(1, "Black");
+    this.goToState = function(){
+        this.deletePieces(0,1);
+        this.deletePieces(0,2);
+        this.deletePieces(1,0);
+        this.deletePieces(1,1);
+        this.deletePieces(1,2);
+        this.deletePieces(1,5);
+        this.deletePieces(2,0);
+        this.deletePieces(2,1);
+        this.deletePieces(2,5);
+        this.deletePieces(3,3);
+        this.deletePieces(3,4);
+        this.deletePieces(3,5);
+        this.deletePieces(4,0);
+        this.deletePieces(4,3);
+        this.deletePieces(4,4);
+        this.deletePieces(4,5);
+        this.deletePieces(5,1);
+        this.deletePieces(5,3);
+        this.deletePieces(5,4);
+    };
+
+    this.playerWin = function(player, color){
+       var playerWin = this.getPiecesColor(1, "Black");
 
         if(playerWin = 6){
             return true;
@@ -159,30 +187,88 @@ var Engine = function () {
 
     this.checkPossiblePieces = function (x,y) {
         var neighborNumber = 0;
- //       for (var i = 0; i < board.length; i++) {
-   //         for (var j = 0; j < board.length; j++) {
-                if (x != 0 && board[x-1][y] != undefined) {
-                    neighborNumber ++;
-                }
 
-                if (x != 5 && board[x+1][y] != undefined) {
-                    neighborNumber ++;
-                }
+        if (x != 0 && board[x-1][y] != undefined) {
+            neighborNumber ++;
+        }
 
-                if (y != 0 && board[x][y-1] != undefined) {
-                    neighborNumber ++;
-                }
+        if (x != 5 && board[x+1][y] != undefined) {
+            neighborNumber ++;
+        }
 
-                if (y != 5 && board[x][y+1] != undefined) {
-                    neighborNumber ++;
-                }
+        if (y != 0 && board[x][y-1] != undefined) {
+            neighborNumber ++;
+        }
 
-                if(neighborNumber == 2){
-                    return true;
-                }
+        if (y != 5 && board[x][y+1] != undefined) {
+            neighborNumber ++;
+        }
 
-                return false;
+        if(neighborNumber < 2){
+            this.checkNeighborInf2(x,y);
+        }
+        else{
+            this.checkNeighborSup2(x,y);
+        }
+
+        if(neighborNumber <= 2 && sameNeighborCount >=1){
+            sameNeighborCount =0;
+            return true;
+        }
+
+        sameNeighborCount =0;
+        return false;
+    }
+
+    this.checkNeighborSup2 = function (x,y) {
+        if(x != 5 && y != 5){
+            if(board[x][y+1] != undefined && board[x+1][y] != undefined && board[x+1][y+1] != undefined){
+                sameNeighborCount++;
             }
- //       }
- //   }
-}
+        }
+
+        if(y != 0 && x != 0  ){
+            if(board[x][y-1] != undefined && board[x-1][y] != undefined && board[x-1][y-1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+
+        if(y != 5 && x != 0){
+            if( board[x][y+1] != undefined && board[x-1][y] != undefined && board[x-1][y+1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+
+        if(y != 0 && x != 5){
+            if(board[x][y-1] != undefined && board[x+1][y] != undefined && board[x+1][y-1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+    }
+
+    this.checkNeighborInf2 = function (x,y) {
+        if(x != 5 && y != 5){
+            if(board[x][y+1] != undefined || board[x+1][y] != undefined && board[x+1][y+1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+
+        if(y != 0 && x != 0  ){
+            if(board[x][y-1] != undefined || board[x-1][y] != undefined && board[x-1][y-1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+
+        if(y != 5 && x != 0){
+            if( board[x][y+1] != undefined || board[x-1][y] != undefined && board[x-1][y+1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+
+        if(y != 0 && x != 5){
+            if(board[x][y-1] != undefined || board[x+1][y] != undefined && board[x+1][y-1] != undefined){
+                sameNeighborCount++;
+            }
+        }
+    };
+};

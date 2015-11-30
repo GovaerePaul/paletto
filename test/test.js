@@ -26,17 +26,27 @@ PalettoTestCase.prototype.testStory4 = function () {
     assertEquals(e.deletePieces(0,0), 34);
     e.setPlayer2Pieces();
     assertEquals(e.getPlayer2Pieces(), 1);
-    assertEquals(e.addPiecesPlayer(1,"Black"), 1);
+    assertEquals(e.addPiecesPlayer(2,"Black"), 1);
 
     assertEquals(e.checkPossiblePieces(5,5), true);
 
     assertEquals(e.deletePieces(5,5), 33);
     e.setPlayer2Pieces();
     assertEquals(e.getPlayer2Pieces(), 2);
-    assertEquals(e.addPiecesPlayer(1,"Black"), 2);
+    assertEquals(e.addPiecesPlayer(2,"Black"), 2);
 };
 
 PalettoTestCase.prototype.testStory5 = function () {
+    e.goToState();
+
+    assertEquals(e.checkPossiblePieces(0,3), true);
+    assertEquals(e.checkPossiblePieces(0,5), true);
+    assertEquals(e.checkPossiblePieces(2,4), true);
+    assertEquals(e.checkPossiblePieces(3,0), true);
+    assertEquals(e.checkPossiblePieces(4,1), true);
+    assertEquals(e.checkPossiblePieces(5,2), true);
+
+    assertEquals(e.checkPossiblePieces(2,2), false);
 
 };
 var d = new Engine();
