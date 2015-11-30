@@ -3,7 +3,8 @@
 var Engine = function () {
     var board = new Array(6);
     var piecesOnBoard = 36;
-    var playerPieces = 0;
+    var player1Pieces = 0;
+    var player2Pieces = 0;
     var currentPlayer = new Array("1", "2");
     currentPlayer["1"] = new Array("Red", "Green", "Black", "White", "Yellow", "Blue");
     currentPlayer["2"] = new Array("Red", "Green", "Black", "White", "Yellow", "Blue");
@@ -74,22 +75,22 @@ var Engine = function () {
         this.putBlue();
     };
 
-    this.isJuxtapose = function() {
-        for (var i = 0 ; i < board.length ; i++){
-            for(var j = 0 ; j < board.length; j++){
-                if(j != 5 && board[i][j] == board[i][j+1]){
+    this.isJuxtapose = function () {
+        for (var i = 0; i < board.length; i++) {
+            for (var j = 0; j < board.length; j++) {
+                if (j != 5 && board[i][j] == board[i][j + 1]) {
                     return false;
                 }
 
-                if(j!=0 && board[i][j] == board[i][j-1]){
+                if (j != 0 && board[i][j] == board[i][j - 1]) {
                     return false;
                 }
 
-                if(i != 5 && board[i][j] == board[i+1][j]){
+                if (i != 5 && board[i][j] == board[i + 1][j]) {
                     return false;
                 }
 
-                if(i != 0 && board[i][j] == board[i-1][j]){
+                if (i != 0 && board[i][j] == board[i - 1][j]) {
                     return false;
                 }
 
@@ -99,38 +100,75 @@ var Engine = function () {
     };
 
     this.isInCorner = function (color) {
-        if(board[0][0] == color || board[0][5] == color || board[5][0] == color || board[5][5] == color){
+        if (board[0][0] == color || board[0][5] == color || board[5][0] == color || board[5][5] == color) {
             return true;
         }
 
         return false;
     };
 
-    this.getColorPieces = function (x,y){
+    this.getColorPieces = function (x, y) {
         return board[x][y].value;
     }
 
-    this.deletePieces = function (x,y) {
+    this.deletePieces = function (x, y) {
         board[x][y] == undefined;
         piecesOnBoard--;
         return piecesOnBoard;
     };
 
-    this.setPlayerPieces = function() {
-        playerPieces++;
+    this.setPlayer1Pieces = function () {
+        player1Pieces++;
     };
 
-    this.getPlayerPieces = function () {
-        return playerPieces;
+    this.getPlayer1Pieces = function () {
+        return player1Pieces;
     };
 
-    this.addPiecesPlayer = function(player, color) {
-        if(currentPlayer[player][color]  == undefined){
+    this.setPlayer2Pieces = function () {
+        player2Pieces++;
+    };
+
+    this.getPlayer2Pieces = function () {
+        return player2Pieces;
+    };
+
+    this.addPiecesPlayer = function (player, color) {
+        if (currentPlayer[player][color] == undefined) {
             currentPlayer[player][color] = 1;
         }
         else {
             currentPlayer[player][color] += 1;
         }
         return currentPlayer[player][color];
+    };
+
+    this.checkPossiblePieces = function () {
+        var neighborNumber = 0;
+        for (var i = 0; i < board.length; i++) {
+            for (var j = 0; j < board.length; j++) {
+                if (i != 0 && board[i-1][j] != undefined) {
+                    neighborNumber ++;
+                }
+
+                if (i != 5 && board[i+1][j] != undefined) {
+                    neighborNumber ++;
+                }
+
+                if (j != 0 && board[i][j-1] != undefined) {
+                    neighborNumber ++;
+                }
+
+                if (j != 5 && board[i][j+1] != undefined) {
+                    neighborNumber ++;
+                }
+
+                if(neighborNumber == 2){
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
-};
+}
