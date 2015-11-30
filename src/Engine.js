@@ -115,7 +115,7 @@ var Engine = function () {
 
     this.deletePieces = function (x, y) {
         if(board[x][y] == undefined){
-            console.log("WARNING : Marble already take by an other player!")
+            console.log(x.toString()+ y.toString()+"WARNING : Marble already take by an other player!")
         }
 
         board[x][y] = undefined;
