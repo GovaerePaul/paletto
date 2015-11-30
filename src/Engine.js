@@ -143,32 +143,29 @@ var Engine = function () {
         return currentPlayer[player][color];
     };
 
-    this.checkPossiblePieces = function () {
+
+    this.checkPossiblePieces = function (x,y) {
         var neighborNumber = 0;
-        for (var i = 0; i < board.length; i++) {
-            for (var j = 0; j < board.length; j++) {
-                if (i != 0 && board[i-1][j] != undefined) {
-                    neighborNumber ++;
-                }
-
-                if (i != 5 && board[i+1][j] != undefined) {
-                    neighborNumber ++;
-                }
-
-                if (j != 0 && board[i][j-1] != undefined) {
-                    neighborNumber ++;
-                }
-
-                if (j != 5 && board[i][j+1] != undefined) {
-                    neighborNumber ++;
-                }
-
-                if(neighborNumber == 2){
-                    return true;
-                }
-
-                return false;
-            }
+        if (x != 0 && board[x-1][y] != undefined) {
+            neighborNumber ++;
         }
+
+        if (x != 5 && board[x+1][y] != undefined) {
+            neighborNumber ++;
+        }
+
+        if (y != 0 && board[x][y-1] != undefined) {
+            neighborNumber ++;
+        }
+
+        if (y != 5 && board[x][y+1] != undefined) {
+            neighborNumber ++;
+        }
+
+        if(neighborNumber == 2){
+            return true;
+        }
+
+        return false;
     }
 }
