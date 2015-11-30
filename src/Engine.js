@@ -127,6 +127,26 @@ var Engine = function () {
         player1Pieces++;
     };
 
+    this.noMarbleWinner = function(){
+        var nbrMarble = this.getMarbleOnBoard();
+
+        if(nbrMarble == 0){
+            return true;
+        }
+    };
+
+    this.getCurrentPlayer = function(){
+        var char = currentPlayer.toString().split("");
+        var currentplayer = char[0].toString();
+
+        return currentplayer;
+    }
+
+    this.getMarbleOnBoard = function(){
+        return piecesOnBoard;
+    }
+
+
     this.getPlayer1Pieces = function () {
         return player1Pieces;
     };
